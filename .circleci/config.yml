@@ -1,0 +1,13 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: openpolicyagent/conftest
+    working_directory: ~/workspace
+    steps:
+      - checkout
+      - run:
+          name: Run conftest
+          command: |
+            cd open_api
+            conftest test open_api3.yml
