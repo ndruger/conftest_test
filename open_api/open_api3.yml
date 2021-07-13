@@ -1,0 +1,82 @@
+openapi: 3.0.0
+info:
+  title: Sample API
+  description: This is OpenAPI example
+  version: 0.0.1
+servers:
+  - url: https://api.example.com/v1
+    description: Example Server
+tags:
+  - name: user
+    description: User API
+paths:
+  /users:
+    get:
+      operationId: retrieveUserList
+      summary: Returns a list of users.
+      tags:
+        - user
+      description: Returns a list of users.
+      parameters:
+        - name: name
+          description: return users with given name
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: A JSON array of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/User"
+    post:
+      operationId: createUser
+      summary: Creates user.
+      tags:
+        - user
+      description: Creates user.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  description: name of user
+                  type: string
+      responses:
+        "200":
+          description: created user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "400":
+          description: invalid request
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+components:
+  schemas:
+    User:
+      type: object
+      description: user
+      properties:
+        name:
+          description: name of user
+          type: string
+          example: userA
+    InvalidRequest:
+      type: object
+      description: invalid request
+      properties:
+        code:
+          description: code of error
+          type: string
+          example: "400-01"

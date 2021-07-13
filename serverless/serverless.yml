@@ -1,0 +1,9 @@
+service: myService
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  timeout: 10 # default is 6 seconds
+functions:
+  hello:
+    handler: handler.hello
