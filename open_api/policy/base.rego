@@ -10,7 +10,7 @@ deny[msg] {
 
 deny[msg] {
   api := paths[_][_]
-  not re_match("^[a-z]", api.operationId)
+  not re_match("^[a-z][A-Za-z0-9]*$", api.operationId)
   msg := "operationId should be camel case"
 }
 
